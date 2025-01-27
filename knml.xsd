@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example.com/knml"
+	xmlns="http://example.com/knml" elementFormDefault="qualified">
+
+	<!-- definition of simple elements -->
+	<xs:element name="title" type="xs:string"/>
+	<xs:element name="author" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="published" type="xs:date"/>
+
+	<xs:element name="writer" type="xs:string"/>
+	<xs:element name="artist" type="xs:string"/>
+	<xs:element name="composer" type="xs:string"/>
+	
+	<xs:element name="paragraph" type="xs:string"/>
+	
+	<!-- definition of attributes -->
+	<xs:attribute name="number" type="xs:integer"/>
+	<xs:attribute name="img" type="xs:string"/>
+	<xs:attribute name="rule" type="xs:string"/>
+	<xs:attribute name="track" type="xs:string"/>
+	<xs:attribute name="voice" type="xs:string"/>
+	<xs:attribute name="name" type="xs:string"/>
+	<xs:attribute name="cast" type="xs:string"/>
+	<xs:attribute name="loop" type="xs:boolean" default="false"/>
+	<xs:attribute name="position">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="left|center|right"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	
+	<!-- definition of groups -->
+	<xs:attributeGroup name="soundattrgroup">
+		<xs:attribute ref="track"/>
+		<xs:attribute ref="loop"/>
+	</xs:attributeGroup>
+	
+	<xs:attributeGroup name="characterattrgroup">
+		<xs:attribute ref="name"/>
+		<xs:attribute ref="img"/>
+		<xs:attribute ref="position"/>
+	</xs:attributeGroup>
+	
+	<xs:attributeGroup name="dialogueattrgroup">
+		<xs:attribute ref="cast"/>
+		<xs:attribute ref="voice"/>
+	</xs:attributeGroup>
+	
+	
+	<!-- definition of complex elements -->
+	<!-- アイコン -->
+	<xs:element name="icon">
+		<xs:complexType>
+			<xs:attribute ref="img"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- スタッフ -->
+	<xs:element name="staff">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="writer"/>
+				<xs:element ref="artist"/>
+				<xs:element ref="composer"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- メタデータ -->
+	<xs:element name="metadata">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title"/>
+				<xs:element ref="icon"/>
+				<xs:element ref="author"/>
+				<xs:element ref="stuff"/>
+				<xs:element ref="description"/>
+				<xs:element ref="published"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- 素材配置 -->
+	<xs:element name="background">
+		<xs:complexType>
+			<xs:attribute ref="img"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sound">
+		<xs:complexType>
+			<xs:attributeGroup ref="soundattrgroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="character">
+		<xs:complexType>
+			<xs:attributeGroup ref="characterattrgroup"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- セリフ -->
+	<xs:element name="dialogue">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="dialogueattrgroup"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- 改ページ -->
+	<xs:element name="break">
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- シーン -->
+	<xs:element name="scene">
+		<xs:complexType>
+			<xs:attribute ref="number"/>
+			<xs:sequence>
+				<xs:element ref="background"/>
+				<xs:element ref="sound"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="character"/>
+					<xs:element ref="paragraph"/>
+					<xs:element ref="dialogue"/>
+					<xs:element ref="sound"/>
+					<xs:element ref="break">
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- トランジション -->
+	<xs:element name="transition">
+		<xs:complexType>
+			<xs:attribute ref="rule"/>
+		</xs:complexType>
+	
+	<!-- 本文 -->
+	<xs:element name="body">
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element ref="scene"/>
+				<xs:element ref="transition"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- 全体 -->
+	<xs:element name="knml">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="metadata"/>
+				<xs:element ref="body"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>

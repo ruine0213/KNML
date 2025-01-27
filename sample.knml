@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns="http://example.com/knml"
+			xsi:schemaLocation="http://example.com/knml knml.xsd">
+
+	<metadata>
+		<title>タイトル</title>
+		<icon img="アイコン画像ファイル"/>
+		<author>作者(代表者)</author>
+		<staff>
+			<writer>著者</writer>
+			<artist>イラストレーター</artist>
+			<composer>作曲家</composer>
+		</staff>
+		<description>作品説明</description>
+		<published>公開日</published>
+	</metadata>
+
+	<body>
+		<scene number="1">
+			<background img="背景画像ファイル"/>
+			<sound track="BGMファイル" loop="true"/>
+			<character name="キャラ名" img="画像ファイル" position="立ち位置"/>
+			<paragraph>地の文の段落</paragraph>
+			<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>
+			<sound track="効果音ファイル"/>
+			<break/>
+			<paragraph>地の文の段落</paragraph>
+			<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>
+		</scene>
+		<transition rule="ルール画像ファイル"/>
+		<scene number="2">
+		</scene>
+	</body>
+</knml>

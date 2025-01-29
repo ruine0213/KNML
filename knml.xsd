@@ -11,15 +11,16 @@
 	<xs:element name="writer" type="xs:string"/>
 	<xs:element name="artist" type="xs:string"/>
 	<xs:element name="composer" type="xs:string"/>
-	
+
 	<xs:element name="paragraph" type="xs:string"/>
-	
+
 	<!-- definition of attributes -->
-	<xs:attribute name="number" type="xs:integer"/>
-	<xs:attribute name="img" type="xs:string"/>
-	<xs:attribute name="rule" type="xs:string"/>
-	<xs:attribute name="track" type="xs:string"/>
-	<xs:attribute name="voice" type="xs:string"/>
+	<xs:attribute name="number" type="xs:positiveInteger"/>
+	<xs:attribute name="time" type="xs:nonNegativeInteger"/>
+	<xs:attribute name="img" type="xs:anyURI"/>
+	<xs:attribute name="rule" type="xs:anyURI"/>
+	<xs:attribute name="track" type="xs:anyURI"/>
+	<xs:attribute name="voice" type="xs:anyURI"/>
 	<xs:attribute name="name" type="xs:string"/>
 	<xs:attribute name="cast" type="xs:string"/>
 	<xs:attribute name="loop" type="xs:boolean" default="false"/>
@@ -30,25 +31,25 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
-	
+
 	<!-- definition of groups -->
 	<xs:attributeGroup name="soundattrgroup">
 		<xs:attribute ref="track"/>
 		<xs:attribute ref="loop"/>
 	</xs:attributeGroup>
-	
+
 	<xs:attributeGroup name="characterattrgroup">
 		<xs:attribute ref="name"/>
 		<xs:attribute ref="img"/>
 		<xs:attribute ref="position"/>
 	</xs:attributeGroup>
-	
+
 	<xs:attributeGroup name="dialogueattrgroup">
 		<xs:attribute ref="cast"/>
 		<xs:attribute ref="voice"/>
 	</xs:attributeGroup>
-	
-	
+
+
 	<!-- definition of complex elements -->
 	<!-- アイコン -->
 	<xs:element name="icon">
@@ -56,7 +57,7 @@
 			<xs:attribute ref="img"/>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- スタッフ -->
 	<xs:element name="staff">
 		<xs:complexType>
@@ -67,7 +68,7 @@
 			</xs:choice>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- メタデータ -->
 	<xs:element name="metadata">
 		<xs:complexType>
@@ -81,7 +82,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- 素材配置 -->
 	<xs:element name="background">
 		<xs:complexType>
@@ -98,7 +99,7 @@
 			<xs:attributeGroup ref="characterattrgroup"/>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- セリフ -->
 	<xs:element name="dialogue">
 		<xs:complexType>
@@ -109,17 +110,23 @@
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- 改ページ -->
 	<xs:element name="break">
 		<xs:complexType>
 		</xs:complexType>
 	</xs:element>
-	
+
+	<!-- 待機 -->
+	<xs:element name="wait">
+		<xs:complexType>
+			<xs:attribute ref="time"/>
+		</xs:complexType>
+	</xs:element>
+
 	<!-- シーン -->
 	<xs:element name="scene">
 		<xs:complexType>
-			<xs:attribute ref="number"/>
 			<xs:sequence>
 				<xs:element ref="background"/>
 				<xs:element ref="sound"/>
@@ -131,15 +138,16 @@
 					<xs:element ref="break">
 				</xs:choice>
 			</xs:sequence>
+			<xs:attribute ref="number" use="required"/>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- トランジション -->
 	<xs:element name="transition">
 		<xs:complexType>
 			<xs:attribute ref="rule"/>
 		</xs:complexType>
-	
+
 	<!-- 本文 -->
 	<xs:element name="body">
 		<xs:complexType>
@@ -149,7 +157,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- 全体 -->
 	<xs:element name="knml">
 		<xs:complexType>
@@ -159,5 +167,5 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 </xs:schema>

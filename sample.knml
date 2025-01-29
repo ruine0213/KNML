@@ -23,7 +23,9 @@
 			<character name="キャラ名" img="画像ファイル" position="立ち位置"/>
 			<paragraph>地の文の段落</paragraph>
 			<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>
+			<wait time="待機時間"/>
 			<sound track="効果音ファイル"/>
+			<paragraph>地の文の段落</paragraph>
 			<break/>
 			<paragraph>地の文の段落</paragraph>
 			<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>

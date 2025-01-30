@@ -1,60 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example.com/knml"
-	xmlns="http://example.com/knml" elementFormDefault="qualified">
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://example.com/knml"
+    xmlns="http://example.com/knml"
+    elementFormDefault="qualified"
+>
 
 	<!-- definition of simple elements -->
-	<xs:element name="title" type="xs:string"/>
-	<xs:element name="author" type="xs:string"/>
-	<xs:element name="description" type="xs:string"/>
-	<xs:element name="published" type="xs:date"/>
+	<xs:element name="title" type="xs:string" />
+	<xs:element name="author" type="xs:string" />
+	<xs:element name="description" type="xs:string" />
+	<xs:element name="published" type="xs:date" />
 
-	<xs:element name="writer" type="xs:string"/>
-	<xs:element name="artist" type="xs:string"/>
-	<xs:element name="composer" type="xs:string"/>
+	<xs:element name="writer" type="xs:string" />
+	<xs:element name="artist" type="xs:string" />
+	<xs:element name="composer" type="xs:string" />
 
-	<xs:element name="paragraph" type="xs:string"/>
+	<xs:element name="paragraph" type="xs:string" />
 
 	<!-- definition of attributes -->
-	<xs:attribute name="number" type="xs:positiveInteger"/>
-	<xs:attribute name="time" type="xs:nonNegativeInteger"/>
-	<xs:attribute name="img" type="xs:anyURI"/>
-	<xs:attribute name="rule" type="xs:anyURI"/>
-	<xs:attribute name="track" type="xs:anyURI"/>
-	<xs:attribute name="voice" type="xs:anyURI"/>
-	<xs:attribute name="name" type="xs:string"/>
-	<xs:attribute name="cast" type="xs:string"/>
-	<xs:attribute name="loop" type="xs:boolean" default="false"/>
+	<xs:attribute name="number" type="xs:positiveInteger" />
+	<xs:attribute name="time" type="xs:nonNegativeInteger" default="1" />
+	<xs:attribute name="src" type="xs:anyURI" />
+	<xs:attribute name="img" type="xs:anyURI" />
+	<xs:attribute name="rule" type="xs:anyURI" />
+	<xs:attribute name="bgm" type="xs:anyURI" />
+	<xs:attribute name="track" type="xs:anyURI" />
+	<xs:attribute name="voice" type="xs:anyURI" />
+	<xs:attribute name="color" type="xs:string" default="black" />
+	<xs:attribute name="cast" type="xs:string" />
+	<xs:attribute name="skip" type="xs:boolean" default="true" />
 	<xs:attribute name="position">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:pattern value="left|center|right"/>
+				<xs:pattern value="left|center|right" />
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
 
 	<!-- definition of groups -->
-	<xs:attributeGroup name="soundattrgroup">
-		<xs:attribute ref="track"/>
-		<xs:attribute ref="loop"/>
+	<xs:attributeGroup name="videoattrgroup">
+		<xs:attribute ref="src" />
+		<xs:attribute ref="skip" />
 	</xs:attributeGroup>
 
-	<xs:attributeGroup name="characterattrgroup">
-		<xs:attribute ref="name"/>
-		<xs:attribute ref="img"/>
-		<xs:attribute ref="position"/>
+	<xs:attributeGroup name="bgattrgroup">
+		<xs:attribute ref="img" />
+		<xs:attribute ref="color" />
+	</xs:attributeGroup>
+
+	<xs:attributeGroup name="soundattrgroup">
+		<xs:attribute ref="track" />
+	</xs:attributeGroup>
+
+	<xs:attributeGroup name="spriteattrgroup">
+		<xs:attribute ref="cast" />
+		<xs:attribute ref="img" />
+		<xs:attribute ref="position" default="center" />
 	</xs:attributeGroup>
 
 	<xs:attributeGroup name="dialogueattrgroup">
-		<xs:attribute ref="cast"/>
-		<xs:attribute ref="voice"/>
+		<xs:attribute ref="cast" />
+		<xs:attribute ref="voice" />
 	</xs:attributeGroup>
-
 
 	<!-- definition of complex elements -->
 	<!-- アイコン -->
 	<xs:element name="icon">
 		<xs:complexType>
-			<xs:attribute ref="img"/>
+			<xs:attribute ref="img" />
 		</xs:complexType>
 	</xs:element>
 
@@ -62,9 +76,9 @@
 	<xs:element name="staff">
 		<xs:complexType>
 			<xs:choice maxOccurs="unbounded">
-				<xs:element ref="writer"/>
-				<xs:element ref="artist"/>
-				<xs:element ref="composer"/>
+				<xs:element ref="writer" />
+				<xs:element ref="artist" />
+				<xs:element ref="composer" />
 			</xs:choice>
 		</xs:complexType>
 	</xs:element>
@@ -73,12 +87,12 @@
 	<xs:element name="metadata">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="title"/>
-				<xs:element ref="icon"/>
-				<xs:element ref="author"/>
-				<xs:element ref="stuff"/>
-				<xs:element ref="description"/>
-				<xs:element ref="published"/>
+				<xs:element ref="title" />
+				<xs:element ref="icon" />
+				<xs:element ref="author" />
+				<xs:element ref="stuff" />
+				<xs:element ref="description" />
+				<xs:element ref="published" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -86,17 +100,43 @@
 	<!-- 素材配置 -->
 	<xs:element name="background">
 		<xs:complexType>
-			<xs:attribute ref="img"/>
+			<xs:attributeGroup ref="bgattrgroup" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="sound">
 		<xs:complexType>
-			<xs:attributeGroup ref="soundattrgroup"/>
+			<xs:attributeGroup ref="soundattrgroup" />
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="character">
+	<xs:element name="enter">
 		<xs:complexType>
-			<xs:attributeGroup ref="characterattrgroup"/>
+			<xs:attributeGroup ref="spriteattrgroup" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="act">
+		<xs:complexType>
+			<xs:attributeGroup ref="spriteattrgroup" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="exit">
+		<xs:complexType>
+			<xs:attribute ref="cast" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="video">
+		<xs:complexType>
+			<xs:attributeGroup ref="videoattrgroup" />
+		</xs:complexType>
+	</xs:element>
+
+	<!-- 表紙 -->
+	<xs:element name="cover">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="background" />
+				<xs:element ref="sound" />
+			</xs:all>
 		</xs:complexType>
 	</xs:element>
 
@@ -105,7 +145,7 @@
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
-					<xs:attributeGroup ref="dialogueattrgroup"/>
+					<xs:attributeGroup ref="dialogueattrgroup" />
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
@@ -120,7 +160,26 @@
 	<!-- 待機 -->
 	<xs:element name="wait">
 		<xs:complexType>
-			<xs:attribute ref="time"/>
+			<xs:attribute ref="time" />
+		</xs:complexType>
+	</xs:element>
+
+	<!-- カット -->
+	<xs:element name="cut">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="background" />
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="enter" />
+					<xs:element ref="act" />
+					<xs:element ref="exit" />
+					<xs:element ref="paragraph" />
+					<xs:element ref="dialogue" />
+					<xs:element ref="sound" />
+					<xs:element ref="break" />
+					<xs:element ref="wait" />
+				</xs:choice>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 
@@ -128,32 +187,38 @@
 	<xs:element name="scene">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="background"/>
-				<xs:element ref="sound"/>
-				<xs:choice maxOccurs="unbounded">
-					<xs:element ref="character"/>
-					<xs:element ref="paragraph"/>
-					<xs:element ref="dialogue"/>
-					<xs:element ref="sound"/>
-					<xs:element ref="break">
-				</xs:choice>
+				<xs:element ref="cut" />
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element ref="transition" />
+					<xs:element ref="cut" />
+				</xs:sequence>
+			<xs:attribute ref="number" use="required" />
+			<xs:attribute ref="bgm" />
 			</xs:sequence>
-			<xs:attribute ref="number" use="required"/>
 		</xs:complexType>
 	</xs:element>
 
 	<!-- トランジション -->
 	<xs:element name="transition">
 		<xs:complexType>
-			<xs:attribute ref="rule"/>
+			<xs:attribute ref="rule" />
+			<xs:attribute ref="time" />
 		</xs:complexType>
+	</xs:element>
 
 	<!-- 本文 -->
 	<xs:element name="body">
 		<xs:complexType>
 			<xs:sequence maxOccurs="unbounded">
-				<xs:element ref="scene"/>
-				<xs:element ref="transition"/>
+				<xs:choice>
+					<xs:element ref="scene" />
+					<xs:element ref="video" />
+				</xs:choice>
+				<xs:element ref="transition" />
+				<xs:choice>
+					<xs:element ref="scene" />
+					<xs:element ref="video" />
+				</xs:choice>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -162,8 +227,9 @@
 	<xs:element name="knml">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="metadata"/>
-				<xs:element ref="body"/>
+				<xs:element ref="metadata" />
+				<xs:element ref="cover" />
+				<xs:element ref="body" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

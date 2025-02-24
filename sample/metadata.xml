@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<knml
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://github.com/ruine0213/KNML"
+    xsi:schemaLocation="https://github.com/ruine0213/KNML knml.xsd"
+>
+
+	<metadata>
+		<title>タイトル</title>
+		<author>作者(代表者)</author>
+		<staff>
+			<writer>著者</writer>
+			<artist>イラストレーター</artist>
+			<composer>作曲家</composer>
+		</staff>
+		<description>作品説明</description>
+		<published>公開日</published>
+	</metadata>
+</knml>

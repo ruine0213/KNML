@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://example.com/knml"
-    xmlns="http://example.com/knml"
+    targetNamespace="https://github.com/ruine0213/KNML"
+    xmlns="https://github.com/ruine0213/KNML"
     elementFormDefault="qualified"
 >
 
@@ -39,6 +39,14 @@
 	</xs:attribute>
 
 	<!-- definition of groups -->
+
+	<xs:group name="content">
+		<xs:sequence>
+			<xs:element ref="cover" />
+			<xs:element ref="body" />
+		</xs:sequence>
+	</xs:group>
+	
 	<xs:attributeGroup name="videoattrgroup">
 		<xs:attribute ref="src" />
 		<xs:attribute ref="skip" />
@@ -65,12 +73,6 @@
 	</xs:attributeGroup>
 
 	<!-- definition of complex elements -->
-	<!-- アイコン -->
-	<xs:element name="icon">
-		<xs:complexType>
-			<xs:attribute ref="img" />
-		</xs:complexType>
-	</xs:element>
 
 	<!-- スタッフ -->
 	<xs:element name="staff">
@@ -88,7 +90,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="title" />
-				<xs:element ref="icon" />
 				<xs:element ref="author" />
 				<xs:element ref="stuff" />
 				<xs:element ref="description" />
@@ -226,11 +227,10 @@
 	<!-- 全体 -->
 	<xs:element name="knml">
 		<xs:complexType>
-			<xs:sequence>
+			<xs:choice>
 				<xs:element ref="metadata" />
-				<xs:element ref="cover" />
-				<xs:element ref="body" />
-			</xs:sequence>
+				<xs:group ref="content" />
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 

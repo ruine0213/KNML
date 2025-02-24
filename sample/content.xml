@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<knml
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://github.com/ruine0213/KNML"
+    xsi:schemaLocation="https://github.com/ruine0213/KNML knml.xsd"
+>
+
+	<cover>
+		<background img="背景画像ファイル" />
+		<sound track="BGMファイル" />
+	</cover>
+
+	<body>
+		<video src="動画ファイル" skip="true" />
+		<scene number="1" bgm="BGMファイル">
+			<cut>
+				<background color="色名もしくはカラーコード" />
+				<paragraph>地の文の段落</paragraph>
+				<paragraph>地の文の段落</paragraph>
+				<enter cast="キャラ名" img="画像ファイル" position="立ち位置" />
+				<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>
+				<act cast="キャラ名" img="画像ファイル" position="立ち位置" />
+				<sound track="効果音ファイル" />
+				<paragraph>地の文の段落</paragraph>
+				<break />
+				<paragraph>地の文の段落</paragraph>
+				<exit cast="キャラ名" />
+				<wait time="待機時間" />
+			</cut>
+			<transition rule="ルール画像ファイル" time="間隔" />
+			<cut>
+				<background img="背景画像ファイル" />
+				<enter cast="キャラ名" img="画像ファイル" position="立ち位置" />
+				<paragraph>地の文の段落</paragraph>
+				<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>
+			</cut>
+		</scene>
+		<transition rule="ルール画像ファイル" time="間隔" />
+		<scene number="2" bgm="BGMファイル">
+			<cut>
+				<background img="背景画像ファイル" />
+				<enter cast="キャラ名" img="画像ファイル" position="立ち位置" />
+				<paragraph>地の文の段落</paragraph>
+				<dialogue cast="キャラ名" voice="音声ファイル">セリフ</dialogue>
+			</cut>
+		</scene>
+	</body>
+</knml>

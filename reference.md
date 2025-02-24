@@ -8,16 +8,22 @@ This is the top-level element of the KNML document like `<html>`.\
 Write all contents between the start and end tags.
 
 ## 上位要素higher level
-`<knml>`タグの直下にそれぞれひとつずつ配置します。\
-Place each one directly under the `<knml>`tag.
+KNMLを構成する`metadata.xml`および`content.xml`に分けて配置します。\
+Place the whole into parts `metadata.xml` and `content.xml`.
 ### `<metadata></metadata>`
+`metadata.xml`に配置します。\
 タイトルや作者名等の作品情報のためのタグです。\
+Place `metadata.xml`\
 These are tags for work information such as the title and author name.
 ### `<cover></cover>`
+`content.xml`に配置します。\
 表紙(タイトル画面)のデザインを決めるタグです。\
+Place `content.xml`\
 Determines the design of the cover (title screen).
 ### `<body></body>`
+`content.xml`に配置します。\
 小説本体を記述するタグです。\
+Place `content.xml`\
 Describes the novel itself.
 
 ## メタデータ要素metadata
@@ -26,9 +32,6 @@ Place each one directly under the `<metadata>`tag.
 ### `<title></title>`
 作品の題名を記述します。\
 Enter the title of the work.
-### `<icon img="res://image/icon.png"/>`
-書影の代わりとなるアイコンを指定します。\
-Specify an icon to replace the book image.
 ### `<author></author>`
 作者名もしくは共作の場合代表者名を記述します。\
 Write the author's name or the representative name if it is a collaborative work.

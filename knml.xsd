@@ -91,7 +91,7 @@
 			<xs:sequence>
 				<xs:element ref="title" />
 				<xs:element ref="author" />
-				<xs:element ref="stuff" />
+				<xs:element ref="staff" />
 				<xs:element ref="description" />
 				<xs:element ref="published" />
 			</xs:sequence>
